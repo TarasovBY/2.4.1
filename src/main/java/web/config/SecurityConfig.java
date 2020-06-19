@@ -11,17 +11,22 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import web.config.handler.LoginSuccessHandler;
-import web.service.SecUserDetailsService;
+import web.service.UserDetailsServiceImp;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    private UserDetailsServiceImp userDetailsServiceImp;
+
     @Autowired
-    SecUserDetailsService secUserDetailsService;
+    public SecurityConfig(UserDetailsServiceImp userDetailsServiceImp1) {
+        this.userDetailsServiceImp = userDetailsServiceImp1;
+    }
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(secUserDetailsService);
+        auth.userDetailsService(userDetailsServiceImp);
     }
 
     @Override
@@ -55,7 +60,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //страницы аутентификаци доступна всем
                 .antMatchers("/login").permitAll()
                 .antMatchers("/admin/**").hasAuthority("Admin")
-                .antMatchers("/user").hasAuthority("User").anyRequest().authenticated();
+                .antMatchers("/user").hasAuthority("User")
+                .anyRequest().authenticated();
     }
 
     @Bean

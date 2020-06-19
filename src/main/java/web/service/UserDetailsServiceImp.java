@@ -8,10 +8,14 @@ import org.springframework.stereotype.Service;
 import web.model.User;
 
 @Service
-public class SecUserDetailsService implements UserDetailsService {
+public class UserDetailsServiceImp implements UserDetailsService {
+
+    private web.service.Service service;
 
     @Autowired
-    private web.service.Service service;
+    public UserDetailsServiceImp(web.service.Service service) {
+        this.service = service;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {

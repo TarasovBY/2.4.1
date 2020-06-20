@@ -2,6 +2,8 @@ package web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,9 +18,12 @@ import web.service.Service;
 public class CrudController {
 
     private Service service;
+    private PasswordEncoder encoder;
+
 
     @Autowired
-    public CrudController(Service service){
+    public CrudController(Service service, PasswordEncoder encoder){
+        this.encoder = encoder;
         this.service = service;
     }
 
@@ -34,7 +39,7 @@ public class CrudController {
         user.setName(webRequest.getParameter("name"));
         user.setTelephone(webRequest.getParameter("telephone"));
         user.setRole(new CrudSupporting().createRole(webRequest));
-        user.setPassword(webRequest.getParameter("password"));
+        user.setPassword(encoder.encode(webRequest.getParameter("password")));
         service.addUser(user);
         return "redirect:/admin";
     }

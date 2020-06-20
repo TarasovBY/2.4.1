@@ -32,7 +32,8 @@
                     <input type="text" name="telephone" value="${variable.telephone}">
                 </td>
                 <td>
-                    <input type="text" name="password" value="${variable.password}">
+                    <p align="center">*************</p>
+                    <input type="hidden" name="password" value="${variable.password}">
                 </td>
                 <td>
                     <p style="margin: 5px" align="center">Текущие роли:</p>

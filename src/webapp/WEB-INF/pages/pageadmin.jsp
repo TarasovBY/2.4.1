@@ -51,10 +51,6 @@
         </form>
         <form action="admin/deleteuser" method="post">
             <input type="hidden" name="id" value="${variable.id}">
-            <input type="hidden" name="name" value="${variable.name}">
-            <input type="hidden" name="telephone" value="${variable.telephone}">
-            <input type="hidden" name="password" value="${variable.password}">
-            <input type="hidden" name="roles" value="${variable.role}">
             <input type="submit" value="Удалить">
         </form>
 

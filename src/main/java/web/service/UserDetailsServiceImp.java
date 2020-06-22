@@ -10,16 +10,16 @@ import web.model.User;
 @Service
 public class UserDetailsServiceImp implements UserDetailsService {
 
-    private web.service.Service service;
+    private UserServiceDao userServiceDao;
 
     @Autowired
-    public UserDetailsServiceImp(web.service.Service service) {
-        this.service = service;
+    public UserDetailsServiceImp(UserServiceDao userServiceDao) {
+        this.userServiceDao = userServiceDao;
     }
 
     @Override
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
-        User user = service.findUserByName(name);
+        User user = userServiceDao.findUserByName(name);
         if(user == null) {
             throw new UsernameNotFoundException(name);
         }

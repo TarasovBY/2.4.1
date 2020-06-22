@@ -4,7 +4,7 @@ import web.model.User;
 
 import java.util.List;
 
-public interface CrudDao{
+public interface UserDao {
 
     List<User> getAllUser();
 
@@ -19,6 +19,8 @@ public interface CrudDao{
     User returnUser(String name, String password);
 
     User findUserByName(String name);
+
+
 
 
 }

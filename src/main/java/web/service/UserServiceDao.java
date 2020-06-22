@@ -1,9 +1,10 @@
 package web.service;
 
+import web.model.Role;
 import web.model.User;
 import java.util.List;
 
-public interface Service {
+public interface UserServiceDao {
     List<User> getAllUser();
 
     void addUser(User user);
@@ -17,5 +18,6 @@ public interface Service {
     User returnUser(String name, String password);
 
     User findUserByName(String name);
+
 
 }

@@ -23,7 +23,9 @@ public class User implements UserDetails {
     @Column(name = "telephone")
     private String telephone;
 
-    @OneToMany(targetEntity = Role.class, cascade = CascadeType.ALL)
+    @Column
+    @ManyToMany(fetch = FetchType.EAGER, targetEntity = Role.class)
+
     private Set<Role> role;
 
     @Column(name = "password")

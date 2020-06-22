@@ -2,61 +2,55 @@ package web.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import web.dao.CrudDao;
+import web.dao.UserDao;
 import web.model.User;
 import java.util.List;
 
-
+@Transactional
 @org.springframework.stereotype.Service
-public class UserService implements Service {
+public class UserServiceDaoImp implements UserServiceDao {
 
-    private CrudDao crudDao;
+    private final UserDao userDao;
 
     @Autowired
-    public UserService(CrudDao dao) {
-        this.crudDao = dao;
+    public UserServiceDaoImp(UserDao dao) {
+        this.userDao = dao;
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<User> getAllUser() {
-        return crudDao.getAllUser();
+        return userDao.getAllUser();
     }
 
     @Override
-    @Transactional(readOnly = false)
     public void addUser(User user) {
-        crudDao.addUser(user);
+        userDao.addUser(user);
     }
 
     @Override
-    @Transactional(readOnly = false)
     public void editUser(User user) {
-        crudDao.editUser(user);
+        userDao.editUser(user);
     }
 
     @Override
-    @Transactional(readOnly = false)
     public void deleteUser(User user) {
-        crudDao.deleteUser(user);
+        userDao.deleteUser(user);
     }
 
     @Override
-    @Transactional(readOnly = true)
     public boolean searchUser(String name, String password) {
-        return crudDao.searchUser(name, password);
+        return userDao.searchUser(name, password);
     }
 
     @Override
-    @Transactional(readOnly = true)
     public User returnUser(String name, String password) {
-        return crudDao.returnUser(name, password);
+        return userDao.returnUser(name, password);
     }
 
     @Override
-    @Transactional(readOnly = true)
     public User findUserByName(String name) {
-        return crudDao.findUserByName(name);
+        return userDao.findUserByName(name);
     }
+
 
 }

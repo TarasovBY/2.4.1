@@ -1,7 +1,6 @@
 package web.dao;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import web.model.User;
 
 import javax.persistence.EntityManager;
@@ -10,7 +9,7 @@ import javax.persistence.Query;
 import java.util.List;
 
 @Repository
-public class CrudDaoImp implements CrudDao {
+public class UserDaoImp implements UserDao {
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -61,4 +60,6 @@ public class CrudDaoImp implements CrudDao {
         return (User) entityManager.createQuery("FROM User where " +
                 "name = '" + name + "'").getResultList().get(0);
     }
+
+
 }
